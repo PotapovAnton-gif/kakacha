@@ -63,11 +63,12 @@ public:
 class ServerNetworkModule : public Modules::Module {
 
 public:
-	ServerNetworkModule();
-	virtual ~ServerNetworkModule();
+	ServerNetworkModule() : Modules::Module("Server-Network") {}
+	virtual ~ServerNetworkModule() {}
 
 	/*
-	 * Sets the ServerListener to use.
+	 * Sets the ServerListener to use. This module will delete the object on
+	 * termination.
 	 */
 	virtual
 	void
