@@ -119,7 +119,13 @@ public:
 /*
  * Returns the Client-Network module.
  */
-ClientNetworkModule* getClientNetwork();
+ClientNetworkModule& getClientNetwork();
+
+/*
+ * Registers the Client-Network module.
+ * Internal use only -- do NOT invoke outside of registerModules()!
+ */
+void registerModule();
 
 
 } /* namespace Network::Client */

@@ -111,7 +111,13 @@ public:
 /*
  * Returns the Server-Network module.
  */
-ServerNetworkModule* getServerNetwork();
+ServerNetworkModule& getServerNetwork();
+
+/*
+ * Registers the Server-Network module.
+ * Internal use only -- do NOT invoke outside of registerModules()!
+ */
+void registerModule();
 
 
 /*

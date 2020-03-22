@@ -11,7 +11,7 @@ using std::string;
 
 
 /*
- * A program module/
+ * A program module
  */
 class Module {
 public:
@@ -71,6 +71,25 @@ private:
 void registerModule(Module*);
 
 /*
+ * Returns a list of all regsitered modules.
+ */
+const std::vector<Module*> getModules();
+
+/*
+ * Attempts to initialize all registered modules by invoking
+ * Module::initialize() on all objects. If any module fails to initialize,
+ * calls Modules::finalizeModules() and returns false; otherwise returns true.
+ */
+bool initializeModules();
+
+/*
+ * Finalizes all registered modules that have initialized successfully by
+ * invoking Module::finalize() on all objects that are Module::isInitialized(),
+ * then deletes all objects and clears the module registry.
+ */
+void finalizeModules();
+
+/*
  * Different launch modes.
  */
 enum LaunchMode {
@@ -95,6 +114,11 @@ enum LaunchMode {
  * yet.
  */
 LaunchMode getLaunchMode();
+
+/*
+ * Sets the launch mode.
+ */
+void setLaunchMode(LaunchMode);
 
 
 } /* namespace Modules */

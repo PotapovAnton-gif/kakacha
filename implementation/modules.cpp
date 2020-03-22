@@ -54,3 +54,48 @@ void Module::finalize() {
 // ---------------
 // Module registry
 // ---------------
+
+vector<Module*> MODULES;
+
+void registerModule(Module* module) {
+	MODULES.push_back(module);
+}
+
+const vector<Module*>& getModules() {
+	return MODULES;
+}
+
+bool initializeModules() {
+	bool success = true;
+
+	for (Module &module : MODULES) {
+		if (!module.initialize()) {
+			success = false;
+			break;
+		}
+	}
+
+	if (!success) {
+		finalizeModules();
+	}
+
+	return success;
+}
+
+void finalizeModules() {
+	for (
+			Module* module = MODULES.rbegin();
+			module != MODULES.rend();
+			module++
+	) {
+		if (module->isInitialized()) {
+			module->finalize();
+		}
+	}
+
+	for (Module* module : MODULES) {
+		delete module;
+	}
+
+	MODULES.clear();
+}
