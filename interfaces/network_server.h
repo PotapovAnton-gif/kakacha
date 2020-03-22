@@ -13,8 +13,8 @@ using namespace std;
 class Client;
 
 class ServerListener {
-
 public:
+
 	virtual ~ServerListener() {}
 
 	/*
@@ -61,7 +61,6 @@ public:
  * Server Network Module
  */
 class ServerNetworkModule : public Modules::Module {
-
 public:
 
 	/*

@@ -1,25 +1,29 @@
 #include "../interfaces/logic_client.h"
 
-namespace LogicClient {
+#include "../interfaces/network_client.h"
+
+namespace Logic::Client {
 
 
-
-class LogicClientImpl : public LogicClient {
+class ClientLogicImpl : public ClientLogic {
 
 private:
-public:
-	LogicClientImpl() {}
 
-	bool doInitialize() override;
-	void doFinalize() override;
+
+public:
+
+	ClientLogicImpl() {}
+
+	bool doInitialize() override {
+		Network::Client::getClientNetwork().setClientListener(nullptr);
+		return true;
+	}
+
+	void doFinalize() override {
+
+	}
 
 };
 
-bool LogicClientImpl::doInitialize() {
-	Network::Client::getClientNetwork()->setClientListener(nullptr);
-	return true;
-}
-void LogicClientImpl::doFinalize() {
-}
 
-}
+} /* namespace Logic::Client */

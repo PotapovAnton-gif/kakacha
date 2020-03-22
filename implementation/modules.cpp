@@ -2,14 +2,12 @@
 
 #include "../interfaces/modules.h"
 
+namespace Modules {
+
 
 // ------------
 // Module class
 // ------------
-
-using namespace std;
-using namespace Modules;
-
 
 Module::Module(string name) :
 	name(name)
@@ -51,6 +49,7 @@ void Module::finalize() {
 	doFinalize();
 }
 
+
 // ---------------
 // Module registry
 // ---------------
@@ -68,8 +67,8 @@ const vector<Module*>& getModules() {
 bool initializeModules() {
 	bool success = true;
 
-	for (Module &module : MODULES) {
-		if (!module.initialize()) {
+	for (Module *module : MODULES) {
+		if (!module->initialize()) {
 			success = false;
 			break;
 		}
@@ -84,12 +83,13 @@ bool initializeModules() {
 
 void finalizeModules() {
 	for (
-			Module* module = MODULES.rbegin();
-			module != MODULES.rend();
-			module++
+			auto iterator = MODULES.rbegin();
+			iterator != MODULES.rend();
+			iterator++
 	) {
-		if (module->isInitialized()) {
-			module->finalize();
+		Module& module = **iterator;
+		if (module.isInitialized()) {
+			module.finalize();
 		}
 	}
 
@@ -99,3 +99,21 @@ void finalizeModules() {
 
 	MODULES.clear();
 }
+
+
+// ----------
+// LaunchMode
+// ----------
+
+LaunchMode launchMode = UNKNOWN;
+
+LaunchMode getLaunchMode() {
+	return launchMode;
+}
+
+void setLaunchMode(LaunchMode mode) {
+	launchMode = mode;
+}
+
+
+} /* namespace Modules */

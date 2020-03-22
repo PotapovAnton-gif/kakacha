@@ -9,6 +9,8 @@ namespace Client {
 
 
 class ClientListener {
+public:
+
 	virtual ~ClientListener() {}
 
 	/*
@@ -103,7 +105,8 @@ public:
 	 */
 	virtual
 	bool
-	isConnected();
+	isConnected()
+	= 0;
 
 	/*
 	 * Sends the specified packet to the server. The provided object is deleted.

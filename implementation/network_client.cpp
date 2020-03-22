@@ -13,6 +13,7 @@ private:
 
 public:
 
+	ClientNetworkModuleImpl() {}
 	ClientNetworkModuleImpl(const ClientNetworkModuleImpl&) = delete;
 	ClientNetworkModuleImpl& operator=(const ClientNetworkModuleImpl&) = delete;
 
@@ -21,11 +22,12 @@ public:
 			delete listener;
 	}
 
-	void
+	bool
 	doInitialize()
 	override
 	{
 		cout << "[Client-Network] Initializing" << endl;
+		return true;
 	}
 
 	void
@@ -49,7 +51,22 @@ public:
 	connect(string address, string nickname)
 	override
 	{
-		cout << "[Client-Network] Connecting..." << endl;
+		cout << "[Client-Network] Connecting to "
+				<< address << " with nickname "
+				<< nickname << endl;
+
+		this->address = address;
+
+		if (listener == nullptr) {
+			cout << "[Client-Network] No listener set" << endl;
+			return;
+		}
+
+		cout << "[Client-Network] Invoking ClientListener::onConnecting()" << endl;
+		listener->onConnecting();
+
+		cout << "[Client-Network] I have connected" << endl;
+		listener->onConnected();
 	}
 
 	virtual

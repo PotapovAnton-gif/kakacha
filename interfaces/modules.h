@@ -1,13 +1,11 @@
 #ifndef SRC_INTERFACES_MODULES_H_
 #define SRC_INTERFACES_MODULES_H_
 
-#include <string>
-
 #include "common.h"
 
 namespace Modules {
 
-using std::string;
+using namespace std;
 
 
 /*
@@ -73,7 +71,7 @@ void registerModule(Module*);
 /*
  * Returns a list of all regsitered modules.
  */
-const std::vector<Module*> getModules();
+const std::vector<Module*>& getModules();
 
 /*
  * Attempts to initialize all registered modules by invoking

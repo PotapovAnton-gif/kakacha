@@ -1,26 +1,21 @@
 #ifndef SRC_INTERFACES_LOGIC_CLIENT_H_
 #define SRC_INTERFACES_LOGIC_CLIENT_H_
 
-#include "network_common.h"
 #include "modules.h"
-#include "network_client.h"
 
-using namespace Network;
-using namespace Modules;
-
-namespace LogicClient {
+namespace Logic::Client {
 
 
-class LogicClient : public Module {
+class ClientLogic : public Modules::Module {
 
-	LogicClient();
-	virtual ~LogicClient(){}
+public:
 
-
+	ClientLogic();
+	virtual ~ClientLogic(){}
 
 };
 
 
-}
+} /* namespace Logic::Client */
 
 #endif /* SRC_INTERFACES_LOGIC_CLIENT_H_ */

@@ -1,56 +1,50 @@
-#include "network_common.h"
-#include "modules.h"
-#include "network_client.h"
-#include "logic_client.h"
+#include "../interfaces/logic_client.h"
+#include "../interfaces/network_client.h"
 
-using namespace LogicClient;
 using namespace Network;
-using namespace Client;
+using namespace Network::Client;
+
+namespace Logic::Client {
+
 
 class LogicClientListener: public ClientListener {
 
-	LogicClientListener();
-	~LogicClientListener();
+public:
 
-	void onConnecting();
+	LogicClientListener() {}
+	~LogicClientListener() {}
 
-	void onDropped(string reason);
+	void onConnecting() {
 
-	void onConnected();
+		cout << "Connecting with server" << endl;
 
-	void onDisconnected(string reason);
+	}
 
-	void onPacketReceived(Packet*);
+	void onDropped(string reason) {
+
+		cout << "Connection attempt failed because " << reason << endl;
+
+	}
+
+	void onConnected() {
+
+		cout << "Connection established" << endl;
+
+	}
+
+	void onDisconnected(string reason) {
+
+		cout << "OOPS, Disconnect cos" << reason << endl;
+
+	}
+
+	void onPacketReceived(Packet*) {
+
+		cout << "This function have't worked yet" << endl;
+
+	}
 
 };
 
-void LogicClientListener::onConnecting() {
 
-	cout << "Connecting with server" << endl;
-
-}
-
-void LogicClientListener::onDropped(string reason) {
-
-	cout << "Connection attempt failed because " << reason << endl;
-
-}
-
-void LogicClientListener::onConnected() {
-
-	cout << "Connection established" << endl;
-
-}
-
-void LogicClientListener::onDisconnected(string reason) {
-
-	cout << "OOPS, Disconnect cos" << reason << endl;
-
-}
-
-void onPaketonPacketReceived(Packet*) {
-
-	cout << "This function have't worked yet" << endl;
-
-}
-
+} /* namespace Logic::Client */

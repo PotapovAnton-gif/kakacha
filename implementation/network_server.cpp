@@ -14,6 +14,7 @@ private:
 
 public:
 
+	ServerNetworkModuleImpl() : port(0) {}
 	ServerNetworkModuleImpl(const ServerNetworkModuleImpl&) = delete;
 	ServerNetworkModuleImpl& operator=(const ServerNetworkModuleImpl&) = delete;
 
@@ -26,11 +27,12 @@ public:
 		}
 	}
 
-	void
+	bool
 	doInitialize()
 	override
 	{
 		cout << "[Server-Network] Initializing" << endl;
+		return true;
 	}
 
 	void
@@ -72,7 +74,8 @@ public:
 	stop(string message)
 	override
 	{
-		cout << "[Server-Network] Stopping server" << endl;
+		cout << "[Server-Network] Stopping server (reason: "
+				<< message << ")" << endl;
 	}
 
 };

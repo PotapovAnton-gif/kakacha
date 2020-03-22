@@ -19,7 +19,7 @@ int main(int argumentCount, char** arguments) {
 
 }
 
-void processArguments(int argumentCount, char** arguments) {
+void processArguments(int argumentCount, char** /*arguments*/) {
 	// This is a stab
 	// TODO parse arguments
 
