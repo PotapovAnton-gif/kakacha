@@ -11,9 +11,9 @@ void processArguments(int argumentCount, char** arguments);
 
 int main(int argumentCount, char** arguments) {
 
-	registerModules();
-
 	processArguments(argumentCount, arguments);
+
+	registerModules();
 
 	Modules::initializeModules();
 
